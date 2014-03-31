@@ -1,6 +1,7 @@
 require 'bomberman'
 require './lib/ai'
 require 'socket'
+require 'benchmark'
 
 socket = TCPSocket.new('localhost', 40000)
 
@@ -13,8 +14,11 @@ state.next_turn
 ai = Ai.new(state)
 controller = Bomberman::Controller.new(socket)
 begin
-  ai.update
-  action = ai.next_action
-  puts "turn #{state.turn} action #{action}"
-  controller.send(action) if action
+  action = nil
+  took = Benchmark.realtime do
+    ai.update
+    action = ai.next_action
+    controller.send(action) if action
+  end
+  puts "turn #{state.turn} action #{action} took #{took}/#{state.turn_duration / 1000_000_000.0}"
 end while state.next_turn
