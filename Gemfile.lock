@@ -1,0 +1,28 @@
+PATH
+  remote: ~/bomberman/bombermanrb
+  specs:
+    bomberman (0.0.1)
+      curses (~> 1.0.1)
+      multi_json (~> 1.9.2)
+      oj (~> 2.0.10)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    byebug (2.7.0)
+      columnize (~> 0.3)
+      debugger-linecache (~> 1.2)
+    columnize (0.3.6)
+    curses (1.0.1)
+    debugger-linecache (1.2.0)
+    multi_json (1.9.2)
+    oj (2.0.14)
+    rake (10.2.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bomberman!
+  byebug
+  rake

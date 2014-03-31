@@ -1,0 +1,28 @@
+States:
+- Danger: avoid explosion path of placed bomb
+  - Detect by scanning in all 4 directions from this player for bombs with no walls in between
+  - keep track of which bombs were but down by this player and their bomb radius to allow avoiding a bomb by just moving far enough away from it
+  - could try to keep track of which players placed each bomb and the bomb radius for each player to allow avoidance by moving far enough away
+  - simple avoidance would be a breadth first search from the player to the nearest accessible cell that no bomb explosion will cover
+- Avoidance: avoid getting cornered by another player
+- Attack: place a bomb to try to kill another player
+- Mine: place a bomb to destroy rocks for items
+- Gather: try to collect an accessible powerup
+
+
+Additional data to keep track of:
+- which player placed each bomb
+- turn number on which each bomb was placed
+- bomb radius of other players
+- which cells will blow up from a placed bomb (for bomb avoidance)
+- which cells are normally accessible to this player (i.e. no rocks in the way)
+
+Skills:
+- path finder: find the shortest path to get to a cell (e.g. to collect a powerup)
+- breadth first search: find the closest path that means a criteria (e.g. safe from explosion)
+
+Milestones:
++ random movement
++ smooth movements (avoid unnecessary backtracking)
+- place bomb if escape plan exists
+- avoid bomb's explosion path
