@@ -1,5 +1,6 @@
-PATH
-  remote: ~/bomberman/bombermanrb
+GIT
+  remote: git://github.com/dylanahsmith/bombermanrb.git
+  revision: 0c68d5c8c22e24584f436bda516a6f960ac9099b
   specs:
     bomberman (0.0.1)
       curses (~> 1.0.1)
