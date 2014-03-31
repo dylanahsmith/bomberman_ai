@@ -15,6 +15,8 @@ class Ai
     @bombs = []
     @players = []
     @powerups = []
+
+    @wait_for = nil
   end
 
   CELL_PLAYER = 1
@@ -162,15 +164,40 @@ class Ai
 
   def next_action
     pos = idx_from_coord(@state.x, @state.y)
-    if in_danger?(pos)
-      return escape_dir(pos)
+    if @wait_for
+      type, value = @wait_for
+      done = case type
+      when :bombs
+        @state.bombs == value
+      when :pos
+        pos == value
+      end
+      return nil unless done
+      @wait_for = nil
     end
-    if @state.bombs < @state.max_bombs && safe_to_bomb?(pos)
+
+    action = if in_danger?(pos)
+      escape_dir(pos)
+    elsif @state.bombs < @state.max_bombs && safe_to_bomb?(pos)
       @bombs << pos
-      return :bomb
+      :bomb
+    else
+      dirs = available_movements(pos)
+      dirs.delete(last_dir) if dirs.size > 1
+      dirs.sample
     end
-    dirs = available_movements(pos)
-    dirs.delete(last_dir) if dirs.size > 1
-    dirs.sample
+    @wait_for = case action
+    when :bomb
+      [:bombs, @state.bombs + 1]
+    when :left
+      [:pos, pos - 1]
+    when :right
+      [:pos, pos + 1]
+    when :up
+      [:pos, pos - @width]
+    when :down
+      [:pos, pos + @width]
+    end
+    action
   end
 end

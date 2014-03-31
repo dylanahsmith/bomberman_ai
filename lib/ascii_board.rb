@@ -3,14 +3,14 @@ class AsciiBoard
     "Wall" => "#",
     "Rock" => "*",
     "Ground" => " ",
-    "Bomb" => "ß",
+    "Bomb" => "B",
     "PowerUp(Radius)" => "€",
     "PowerUp(Bomb)" => "$",
     "Flame" => "+",
-    "p1" => "p",
-    "p2" => "p",
-    "p3" => "p",
-    "p4" => "p",
+    "p1" => "1",
+    "p2" => "2",
+    "p3" => "3",
+    "p4" => "4",
   }
 
   def initialize(state_hash)
